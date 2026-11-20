@@ -1,0 +1,59 @@
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="usuarioSesion" value="${sessionScope.usuario}" />
+<c:set var="rol" value="${usuarioSesion.rol}" />
+<c:set var="unidadesCarrito" value="${empty requestScope.unidadesCarrito ? 0 : requestScope.unidadesCarrito}" />
+<c:if test="${empty requestScope.unidadesCarrito}">
+    <c:forEach var="entrada" items="${sessionScope.carrito}">
+        <c:set var="unidadesCarrito" value="${unidadesCarrito + entrada.value}" />
+    </c:forEach>
+</c:if>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><c:out value="${empty titulo ? 'MegaPizza' : titulo}"/> | MegaPizza</title>
+    <link rel="stylesheet" href="${ctx}/static/css/estilos.css">
+</head>
+<body>
+<header class="barra">
+    <a class="marca" href="${ctx}/catalogo" aria-label="Inicio MegaPizza">
+        <span class="marca-icono">🍕</span> Mega<span class="marca-acento">Pizza</span>
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+        <a href="${ctx}/catalogo">Catalogo</a>
+
+        <c:if test="${not empty usuarioSesion && (rol == 'CLIENTE' || rol == 'ADMINISTRADOR')}">
+            <a href="${ctx}/pedido?action=ver" class="con-badge">Carrito <span class="badge" id="badge-carrito">${unidadesCarrito}</span></a>
+            <a href="${ctx}/pedido?action=mispedidos">Mis pedidos</a>
+        </c:if>
+
+        <c:if test="${not empty usuarioSesion && (rol == 'CAJERO' || rol == 'ADMINISTRADOR')}">
+            <a href="${ctx}/caja">Caja</a>
+        </c:if>
+        <c:if test="${not empty usuarioSesion && (rol == 'COCINERO' || rol == 'ADMINISTRADOR')}">
+            <a href="${ctx}/cocina">Cocina</a>
+        </c:if>
+        <c:if test="${not empty usuarioSesion && (rol == 'ALMACEN' || rol == 'ADMINISTRADOR')}">
+            <a href="${ctx}/almacen">Almacen</a>
+        </c:if>
+
+        <c:choose>
+            <c:when test="${not empty usuarioSesion}">
+                <span class="usuario"><c:out value="${usuarioSesion.username}"/> (<c:out value="${rol}"/>)</span>
+                <a class="salir" href="${ctx}/auth">Salir</a>
+            </c:when>
+            <c:otherwise>
+                <a class="salir" href="${ctx}/login.jsp">Ingresar</a>
+            </c:otherwise>
+        </c:choose>
+    </nav>
+</header>
+<main class="contenedor">
+    <c:if test="${not empty param.ok}">
+        <div class="alerta alerta-ok" role="status"><c:out value="${param.ok}"/></div>
+    </c:if>
+    <c:if test="${not empty param.error}">
+        <div class="alerta alerta-error" role="alert"><c:out value="${param.error}"/></div>
+    </c:if>

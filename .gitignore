@@ -1,0 +1,23 @@
+# Build
+target/
+*.war
+*.class
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+nbproject/private/
+nbactions.xml
+nb-configuration.xml
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs y configuración local
+*.log
+src/main/resources/db-local.properties

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" role="img" aria-label="Logo Megapizza">
+  <title>Megapizza</title>
+  <g transform="translate(4 4)">
+    <circle cx="28" cy="28" r="26" fill="#d69e48" stroke="#a87028" stroke-width="3"/>
+    <circle cx="28" cy="28" r="20" fill="#be362a"/>
+    <circle cx="28" cy="28" r="17" fill="#f4d169"/>
+    <circle cx="21" cy="22" r="4" fill="#b2302a"/>
+    <circle cx="35" cy="25" r="4" fill="#b2302a"/>
+    <circle cx="27" cy="36" r="4" fill="#b2302a"/>
+  </g>
+  <text x="70" y="30" font-family="Verdana, Geneva, sans-serif" font-size="24" font-weight="bold" fill="#7c2d20">MEGA</text>
+  <text x="70" y="52" font-family="Verdana, Geneva, sans-serif" font-size="24" font-weight="bold" fill="#d69e48">PIZZA</text>
+</svg>
